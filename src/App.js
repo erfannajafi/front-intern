@@ -1,6 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
+import MyForm from "./components/MyForm";
 
 function App() {
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -14,9 +14,9 @@ function App() {
   }, []);
   
   return (
-    <div className="App">
+    <div >
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <MyForm />
         <div>{time}</div>
       </header>
     </div>
