@@ -1,15 +1,24 @@
 @import '~antd/dist/antd.css';
 
 
-.App-header {
-  background-color: #f4f5f7;
-  min-height: 100vh;
+.header {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #f4f5f7;
+  min-height: 100vh;
+}
+
+.box{
+  background-color: #fcfcfc;
   font-size: calc(10px + 2vmin);
   color: rgb(37, 35, 35);
+  margin: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  width: 60%;
+
 }
 
 .mytexts {

@@ -14,11 +14,11 @@ function App() {
   }, []);
   
   return (
-    <div >
-      <header className="App-header">
+    <div className="header">
+      <header className="box">
         <MyForm />
-        <div>{time}</div>
       </header>
+      <div>{time}</div>
     </div>
   );
 }
