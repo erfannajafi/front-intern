@@ -33,8 +33,12 @@ class MyForm extends React.Component {
           </Col>
 
           <Col span={12}>
-            <Form.Item label="State" >
-              <Switch checkedChildren="is enable" unCheckedChildren="is disable" defaultChecked/>
+            <Form.Item 
+                name="State"
+                label="State"
+                valuePropName='checked' 
+              >
+              <Switch checkedChildren="is enable" unCheckedChildren="is disable"  defaultChecked/>
             </Form.Item>
           </Col>
         </Row>
@@ -79,6 +83,7 @@ class MyForm extends React.Component {
                 label="Author"
               >
                 <div className='mytexts'>System</div>
+                
             </Form.Item>
           </Col>
         </Row>
