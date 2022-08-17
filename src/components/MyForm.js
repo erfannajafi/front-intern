@@ -1,11 +1,13 @@
 import { Button, Form, Input, Switch, Col, Row } from "antd";
 import React from "react";
 import "../App.css";
-import { getLists } from "../api/API";
+import { getLists, updateLists } from "../api/API";
 
 class MyForm extends React.Component {
   state = {
     lists: [],
+
+    currentDateTime: new Date().toLocaleString(),
   };
 
   componentDidMount() {
@@ -22,7 +24,32 @@ class MyForm extends React.Component {
   formRef = React.createRef();
 
   onFinish = (values) => {
+    
+    if (values.State === undefined) {
+      values.State = true;
+    }
+    if (values.Description === undefined) {
+      values.Description = "";
+    }
+    values.LastModified = this.state.currentDateTime;
+    values.Created = this.state.lists[0].created;
+    values.Author = this.state.lists[0].author;
     console.log(values);
+
+    const items = {
+      name: values.Name,
+      desc: values.Description,
+      priority: values.Priority,
+      author: values.Author,
+      created: values.Created,
+      lastModified: values.LastModified,
+      state: values.State,
+    };
+
+    updateLists(items).then((items) => {
+      console.log(items);
+      this.setState({ lists: items });
+    });
   };
 
   render() {
@@ -89,7 +116,7 @@ class MyForm extends React.Component {
                 },
               ]}
             >
-              <Input placeholder="1000" />
+              <Input placeholder={list.priority} />
             </Form.Item>
           </Col>
 
@@ -108,7 +135,7 @@ class MyForm extends React.Component {
           </Col>
 
           <Col span={12}>
-            <Form.Item name="Last modified" label="Last modified">
+            <Form.Item name="LastModified" label="Last modified">
               <div className="mytexts">{list.lastModified}</div>
             </Form.Item>
           </Col>

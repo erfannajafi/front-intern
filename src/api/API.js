@@ -14,11 +14,17 @@ export function getLists(id) {
   });
 }
 
-// export function getLists ()
-// {
-//     return
-//         axios.get(`${BASE_URL}/getForm?id=1000`)
-//         .then(response => { resolve(response.data) })
-//         .catch(error => { reject(error)  })
-
-// }
+export function updateLists(lists) {
+  return new Promise((resolve, reject) => {
+    axios
+      .patch(`${BASE_URL}/setForm`, lists)
+      .then((response) => {
+        resolve(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+        console.log(error);
+      });
+  });
+}
