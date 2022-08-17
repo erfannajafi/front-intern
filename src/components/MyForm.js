@@ -1,8 +1,24 @@
 import { Button, Form, Input, Switch, Col, Row } from "antd";
 import React from "react";
 import "../App.css";
+import { getLists } from "../api/API";
 
 class MyForm extends React.Component {
+  state = {
+    lists: [],
+  };
+
+  componentDidMount() {
+    getLists(1000).then((items) => {
+      console.log(items);
+      this.setState({ lists: items.result });
+    });
+    console.log(this.state.lists);
+  }
+
+  // getLists().then( items => {console.log(items); this.setState( {lists: items} )} );
+  //   console.log(this.state.lists);
+
   formRef = React.createRef();
 
   onFinish = (values) => {
@@ -10,8 +26,9 @@ class MyForm extends React.Component {
   };
 
   render() {
-    return (
+    return this.state.lists.map((list) => (
       <Form
+        key={list._id}
         layout="vertical"
         ref={this.formRef}
         name="control-ref"
@@ -78,7 +95,7 @@ class MyForm extends React.Component {
 
           <Col span={12}>
             <Form.Item name="Author" label="Author">
-              <div className="mytexts">System</div>
+              <div className="mytexts">{list.author}</div>
             </Form.Item>
           </Col>
         </Row>
@@ -86,13 +103,13 @@ class MyForm extends React.Component {
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item name="Created" label="Created">
-              <div className="mytexts">Saturday, Octobor 15,2019, 18:00:00</div>
+              <div className="mytexts">{list.created}</div>
             </Form.Item>
           </Col>
 
           <Col span={12}>
             <Form.Item name="Last modified" label="Last modified">
-              <div className="mytexts">Saturday, Octobor 15,2019, 18:00:00</div>
+              <div className="mytexts">{list.lastModified}</div>
             </Form.Item>
           </Col>
         </Row>
@@ -107,7 +124,7 @@ class MyForm extends React.Component {
           </Col>
         </Row>
       </Form>
-    );
+    ));
   }
 }
 
