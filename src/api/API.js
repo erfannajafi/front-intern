@@ -17,7 +17,7 @@ export function getLists(id) {
 export function updateLists(lists) {
   return new Promise((resolve, reject) => {
     axios
-      .patch(`${BASE_URL}/setForm`, lists)
+      .patch(`${BASE_URL}/setForm`, JSON.stringify({"result":[lists]}))
       .then((response) => {
         resolve(response.data);
         console.log(response.data);

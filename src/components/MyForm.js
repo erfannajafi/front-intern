@@ -37,6 +37,7 @@ class MyForm extends React.Component {
     console.log(values);
 
     const items = {
+      _id: '1000',
       name: values.Name,
       desc: values.Description,
       priority: values.Priority,
