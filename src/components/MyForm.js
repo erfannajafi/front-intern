@@ -15,7 +15,7 @@ class MyForm extends React.Component {
       console.log(items);
       this.setState({ lists: items.result });
     });
-    console.log(this.state.lists);
+    //console.log(this.state.lists);
   }
 
   // getLists().then( items => {console.log(items); this.setState( {lists: items} )} );
@@ -37,7 +37,7 @@ class MyForm extends React.Component {
     console.log(values);
 
     const items = {
-      _id: '1000',
+      _id: this.state.lists[0]._id,
       name: values.Name,
       desc: values.Description,
       priority: values.Priority,
