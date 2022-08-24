@@ -1,7 +1,7 @@
 import { Button, Form, Input, Switch, Col, Row } from "antd";
 import React from "react";
-import "../App.css";
-import { getLists, updateLists } from "../api/API";
+import "App.css";
+import { getLists, updateLists } from "api/API";
 
 class MyForm extends React.Component {
   state = {
@@ -14,6 +14,7 @@ class MyForm extends React.Component {
     getLists(1000).then((items) => {
       console.log(items);
       this.setState({ lists: items.result });
+      console.log(this.state.lists);
     });
     //console.log(this.state.lists);
   }
@@ -24,7 +25,6 @@ class MyForm extends React.Component {
   formRef = React.createRef();
 
   onFinish = (values) => {
-    
     if (values.State === undefined) {
       values.State = true;
     }
