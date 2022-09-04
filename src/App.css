@@ -21,9 +21,18 @@
 
 }
 
-.mytexts {
+.myTextInput {
+  border : none;
+  background-color: transparent;
   color: #94989b;
+  padding: 0;
 }
+
+.myTextInput:focus {
+  background-color: transparent;
+  border: transparent;
+}
+
 
 
 

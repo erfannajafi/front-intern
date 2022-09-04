@@ -33,23 +33,24 @@ class MyForm extends React.Component {
     }
     values.LastModified = this.state.currentDateTime;
     values.Created = this.state.lists[0].created;
-    values.Author = this.state.lists[0].author;
     console.log(values);
 
     const items = {
-      _id: this.state.lists[0]._id,
-      name: values.Name,
-      desc: values.Description,
-      priority: values.Priority,
-      author: values.Author,
-      created: values.Created,
-      lastModified: values.LastModified,
-      state: values.State,
+      id: this.state.lists[0]._id,
+      params:{
+        name: values.Name,
+        desc: values.Description,
+        priority: values.Priority,
+        author: values.Author,
+        created: values.Created,
+        lastModified: values.LastModified,
+        state: values.State,
+      }
     };
 
     updateLists(items).then((items) => {
       console.log(items);
-      this.setState({ lists: items });
+      //this.setState({ lists: items });
     });
   };
 
@@ -61,6 +62,15 @@ class MyForm extends React.Component {
         ref={this.formRef}
         name="control-ref"
         onFinish={this.onFinish}
+        initialValues={{
+          Name: list.name,
+          State: list.state,
+          Description: list.desc,
+          Priority: list.priority,
+          Author: list.author,
+          Created: list.created,
+          LastModified: list.lastModified,
+        }}
       >
         <h1>General Settings</h1>
         <Row gutter={24}>
@@ -71,6 +81,7 @@ class MyForm extends React.Component {
               rules={[
                 {
                   required: true,
+                  message: "Please input your name!",
                 },
               ]}
             >
@@ -83,7 +94,6 @@ class MyForm extends React.Component {
               <Switch
                 checkedChildren="is enable"
                 unCheckedChildren="is disable"
-                defaultChecked
               />
             </Form.Item>
           </Col>
@@ -114,6 +124,7 @@ class MyForm extends React.Component {
               rules={[
                 {
                   required: true,
+                  message: "Please input priority!",
                 },
               ]}
             >
@@ -123,7 +134,7 @@ class MyForm extends React.Component {
 
           <Col span={12}>
             <Form.Item name="Author" label="Author">
-              <div className="mytexts">{list.author}</div>
+              <Input type="text" readOnly="readOnly" className="myTextInput" />
             </Form.Item>
           </Col>
         </Row>
@@ -131,13 +142,13 @@ class MyForm extends React.Component {
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item name="Created" label="Created">
-              <div className="mytexts">{list.created}</div>
+              <Input type="text" readOnly="readOnly" className="myTextInput" />
             </Form.Item>
           </Col>
 
           <Col span={12}>
             <Form.Item name="LastModified" label="Last modified">
-              <div className="mytexts">{list.lastModified}</div>
+              <Input type="text" readOnly="readOnly" className="myTextInput" />
             </Form.Item>
           </Col>
         </Row>
