@@ -10,11 +10,12 @@ export function getLists(id) {
       })
       .catch((error) => {
         reject(error);
+        console.log(error);
       });
   });
 }
 
-export function updateLists(lists) {
+export function updateLists(lists,id) {
   return new Promise((resolve, reject) => {
     axios
       .patch(`${BASE_URL}/setForm`,  lists  )

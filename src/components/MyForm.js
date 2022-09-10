@@ -1,7 +1,24 @@
-import { Button, Form, Input, Switch, Col, Row } from "antd";
+import { Button, Form, Input, Switch, Col, Row, message } from "antd";
 import React from "react";
 import "App.css";
 import { getLists, updateLists } from "api/API";
+
+const key = "updatable";
+
+const loadMessage = () => {
+  message.loading({
+    content: "Loading...",
+    key,
+  });
+};
+
+const openMessage = () => {
+  message.success({
+    content: "edited successfully",
+    key,
+    duration: 4,
+  });
+};
 
 class MyForm extends React.Component {
   state = {
@@ -10,13 +27,16 @@ class MyForm extends React.Component {
     currentDateTime: new Date().toLocaleString(),
   };
 
-  componentDidMount() {
+  getItems() {
     getLists(1000).then((items) => {
       console.log(items);
       this.setState({ lists: items.result });
       console.log(this.state.lists);
     });
-    //console.log(this.state.lists);
+  }
+
+  componentDidMount() {
+    this.getItems();
   }
 
   // getLists().then( items => {console.log(items); this.setState( {lists: items} )} );
@@ -37,7 +57,7 @@ class MyForm extends React.Component {
 
     const items = {
       id: this.state.lists[0]._id,
-      params:{
+      params: {
         name: values.Name,
         desc: values.Description,
         priority: values.Priority,
@@ -45,12 +65,14 @@ class MyForm extends React.Component {
         created: values.Created,
         lastModified: values.LastModified,
         state: values.State,
-      }
+      },
     };
 
-    updateLists(items).then((items) => {
+    loadMessage();
+
+    updateLists(items, 1000).then((items) => {
       console.log(items);
-      //this.setState({ lists: items });
+      openMessage();
     });
   };
 
